@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\CharacterRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CharacterRepository::class)]
+#[ApiResource]
 #[ORM\Table(name: '`character`')]
 class Character
 {
