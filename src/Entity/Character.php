@@ -33,6 +33,9 @@ class Character
     #[ORM\OneToMany(mappedBy: 'charac', targetEntity: Run::class)]
     private $runs;
 
+    #[ORM\Column(type: 'boolean')]
+    private $playable;
+
     public function __construct()
     {
         $this->runs = new ArrayCollection();
@@ -117,6 +120,18 @@ class Character
                 $run->setCharac(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isPlayable(): ?bool
+    {
+        return $this->playable;
+    }
+
+    public function setPlayable(bool $playable): self
+    {
+        $this->playable = $playable;
 
         return $this;
     }

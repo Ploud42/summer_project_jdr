@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Character;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -25,7 +26,8 @@ class CharacterCrudController extends AbstractCrudController
             ImageField::new('image')
                 ->setBasePath('assets/images/heroesPP')
                 ->setUploadDir('public/assets/images/heroesPP')
-                ->setUploadedFileNamePattern('[slug]-[contenthash].[extension]')
+                ->setUploadedFileNamePattern('[slug]-[contenthash].[extension]'),
+            BooleanField::new('playable')
         ];
     }
    
