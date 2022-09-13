@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\RunRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RunRepository::class)]
+#[ApiResource]
 class Run
 {
     #[ORM\Id]
