@@ -19,8 +19,8 @@ class RunCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            AssociationField::new('users'),
-            AssociationField::new('characters'),
+            AssociationField::new('user'),
+            AssociationField::new('charac'),
             DateField::new('date'),
             TextField::new('score')
         ];

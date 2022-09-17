@@ -6,6 +6,7 @@ use App\Repository\CharacterRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CharacterRepository::class)]
@@ -19,6 +20,7 @@ class Character
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["run:read"])]
     private $name;
 
     #[ORM\Column(type: 'integer')]
@@ -134,5 +136,10 @@ class Character
         $this->playable = $playable;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
