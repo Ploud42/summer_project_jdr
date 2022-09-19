@@ -5,11 +5,15 @@ namespace App\Entity;
 use App\Repository\RunRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RunRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+)]
 #[ApiFilter(SearchFilter::class, properties: ['date' => 'exact', 'user' => 'exact'])]
 class Run
 {
@@ -19,9 +23,11 @@ class Run
     private $id;
 
     #[ORM\Column(type: 'date')]
+    #[Groups(["read", "write"])]
     private $date;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(["read", "write"])]
     private $score;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'runs')]
@@ -30,6 +36,7 @@ class Run
 
     #[ORM\ManyToOne(targetEntity: Character::class, inversedBy: 'runs')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["read"])]
     private $charac;
 
     public function getId(): ?int

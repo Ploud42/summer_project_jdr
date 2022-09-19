@@ -4,13 +4,17 @@ namespace App\Entity;
 
 use App\Repository\CharacterRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CharacterRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+)]
 #[ORM\Table(name: '`character`')]
 class Character
 {
@@ -20,22 +24,26 @@ class Character
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["run:read"])]
+    #[Groups(["read"])]
     private $name;
 
     #[ORM\Column(type: 'integer')]
+    #[Groups(["read"])]
     private $hp;
 
     #[ORM\Column(type: 'integer')]
+    #[Groups(["read"])]
     private $atk;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(["read"])]
     private $image;
 
     #[ORM\OneToMany(mappedBy: 'charac', targetEntity: Run::class)]
     private $runs;
 
     #[ORM\Column(type: 'boolean')]
+    #[Groups(["read"])]
     private $playable;
 
     public function __construct()
