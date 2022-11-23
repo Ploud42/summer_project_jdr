@@ -29,7 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(["read", "write"])]
+    #[Groups(["write"])]
     private $email;
 
     #[ORM\Column(type: 'json')]

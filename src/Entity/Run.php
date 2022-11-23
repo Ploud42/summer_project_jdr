@@ -10,27 +10,32 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RunRepository::class)]
-#[ApiResource]
+#[ApiResource(normalizationContext: ['groups' => ['runs']])]
 #[ApiFilter(SearchFilter::class, properties: ['date' => 'exact', 'user' => 'exact'])]
 class Run
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["runs"])]
     private $id;
 
     #[ORM\Column(type: 'date')]
+    #[Groups(["runs"])]
     private $date;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(["runs"])]
     private $score;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'runs')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["runs"])]
     private $user;
 
     #[ORM\ManyToOne(targetEntity: Character::class, inversedBy: 'runs')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["runs"])]
     private $charac;
 
     public function getId(): ?int

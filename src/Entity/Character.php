@@ -25,7 +25,7 @@ class Character
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read"])]
+    #[Groups(["read", "runs"])]
     private $name;
 
     #[ORM\Column(type: 'integer')]
@@ -37,7 +37,7 @@ class Character
     private $atk;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(["read"])]
+    #[Groups(["read", "runs"])]
     private $image;
 
     #[ORM\OneToMany(mappedBy: 'charac', targetEntity: Run::class)]
