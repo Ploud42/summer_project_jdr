@@ -7,7 +7,14 @@ use App\Repository\LevelRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LevelRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    itemOperations: [
+        'get'
+    ],
+    collectionOperations:[
+        'get'
+    ])
+]
 class Level
 {
     #[ORM\Id]

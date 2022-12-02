@@ -10,7 +10,16 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RunRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['runs']])]
+#[ApiResource(
+    normalizationContext: ['groups' => ['runs']],
+    itemOperations: [
+        'get'
+    ],
+    collectionOperations:[
+        'get',
+        'post'
+    ]
+)]
 #[ApiFilter(SearchFilter::class, properties: ['date' => 'exact', 'user' => 'exact'])]
 class Run
 {

@@ -14,6 +14,12 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource(
     normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
+    itemOperations: [
+        'get'
+    ],
+    collectionOperations:[
+        'get'
+    ]
 )]
 #[ORM\Table(name: '`character`')]
 class Character

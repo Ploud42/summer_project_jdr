@@ -15,7 +15,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['read']],
-    denormalizationContext: ['groups' => ['write']],
+    itemOperations: [
+        'get'
+    ],
+    collectionOperations:[
+        'get'
+    ]
 )]
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: ['email'], message: 'Cette email est déjà utilisé.')]
@@ -29,7 +34,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(["write"])]
     private $email;
 
     #[ORM\Column(type: 'json')]
@@ -37,7 +41,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
-    #[Groups("write")]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
